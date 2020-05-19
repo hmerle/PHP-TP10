@@ -22,7 +22,7 @@
     </div>
 </nav>
 <br>
-<form action="viewnewuser.php?func=addUser" method="post">
+<form action="viewnewuser.php?func=addEtudiant" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -41,7 +41,7 @@
 </body>
 <?php
 
-function addUser(){
+function addEtudiant(){
     include 'connexpdo.php';
 
     $dsn = 'pgsql:host=localhost;port=5432;dbname=etudiants;';
@@ -49,8 +49,9 @@ function addUser(){
     $password = 'new_password';
     $idcon = connexpdo($dsn, $user, $password);
     $query = "SELECT * FROM etudiant";
-    $result = $idcon->prepare();
+    $result = $idcon->prepare($query);
     $result->execute();
     $res = $result->fetch();
     echo $res;
+    header("index.php");
 }
